@@ -5,7 +5,7 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
-  weight: ["300", "500", "600"], 
+  weight: ["300", "500", "600"],
 });
 
 export const metadata = {
@@ -13,10 +13,14 @@ export const metadata = {
   description: "Cargador de imágenes con Next.js y Cloudinary",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="es" className={inter.variable}>
-      <body>{children}</body>
+      <body className="font-sans">{children}</body>
     </html>
   );
 }

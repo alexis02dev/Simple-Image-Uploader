@@ -13,7 +13,7 @@ simple-image-uploader/
 ## Clona el repositorio:
 
 ```bash
-git clone https://github.com/tu-usuario/simple-image-uploader.git
+git clone https://github.com/tu-usuario/Simple-Image-Uploader.git
 cd simple-image-
 
 # Instalar dependencias del frontend

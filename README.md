@@ -5,8 +5,8 @@ Aplicación full-stack para subir imágenes a Cloudinary.
 ## 📁 Estructura del Proyecto
 
 simple-image-uploader/
-├── frontend/          # Next.js + TypeScript + Shadcn
-├── backend/           # Express.js + TypeScript
+├── frontend/ # Next.js + TypeScript + Shadcn
+├── backend/ # Express.js + TypeScript
 
 ## 🚀 Instalación
 
@@ -23,3 +23,4 @@ npm install
 # Instalar dependencias del backend
 cd ../backend
 npm install
+```

@@ -10,6 +10,19 @@
   --font-weight-light: 300;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
+
+  /* === Paleta personalizada === */
+  --color-blue: #3662e3;
+  --color-blue-light: #c2daf9;
+
+  --color-gray-darkest: #121826;
+  --color-gray-dark: #212936;
+  --color-gray: #4d5562;
+  --color-gray-light: #e5e7eb;
+  --color-gray-lighter: #f9fafb;
+
+  --color-white: #ffffff;
+  --color-white-alpha: #f9fafbcc;
 }
 
 @layer base {
@@ -27,5 +40,25 @@
     font-weight: var(--font-weight-semibold);
     text-transform: uppercase;
     letter-spacing: 0.05em;
+  }
+
+  .bg-gray-darkest {
+    background-color: var(--color-gray-darkest);
+  }
+  .bg-gray-dark {
+    background-color: var(--color-gray-dark);
+  }
+
+  .text-gray-darkest {
+    color: var(--color-gray-darkest);
+  }
+  .text-gray-dark {
+    color: var(--color-gray-dark);
+  }
+  .text-gray {
+    color: var(--color-gray);
+  }
+  .text-gray-light {
+    color: var(--color-gray-light);
   }
 }

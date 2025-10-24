@@ -17,7 +17,7 @@ export const uploadImage = [
         folder: "uploads_nextjs",
       });
 
-      fs.unlinkSync(req.file.path); // elimina archivo temporal
+      fs.unlinkSync(req.file.path); 
 
       const newImage = await Image.create({
         filename: req.file.originalname,
@@ -45,7 +45,7 @@ export const downloadImage = async (req, res) => {
     if (!image)
       return res.status(404).json({ message: "Imagen no encontrada." });
 
-    res.redirect(image.url); // redirige directamente a Cloudinary
+    res.redirect(image.url); 
   } catch (error) {
     console.error("Error descargando imagen:", error);
     res.status(500).json({ message: "Error al descargar la imagen." });

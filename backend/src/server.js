@@ -34,7 +34,7 @@ connectDB();
 
 // Rutas para la API
 // 1) POST /api/upload -> multer coloca req.file, luego validateFile (Zod), luego controller para subir la imagen a Cloudinary
-app.post("/api/upload", upload.single("image"), validateFile, uploadImage);
+app.post("/api/upload", upload.single("file"), validateFile, uploadImage);
 
 // 2) GET /api/download/:filename -> Descargar la imagen desde Cloudinary
 app.get("/api/download/:filename", downloadImage);

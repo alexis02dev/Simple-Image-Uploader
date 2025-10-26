@@ -1,6 +1,7 @@
 import { v2 as cloudinary } from "cloudinary";
 import dotenv from "dotenv";
 
+// Uso de dotenv para obtener las variables de entorno
 dotenv.config();
 /**
  * Configurar Cloudinary

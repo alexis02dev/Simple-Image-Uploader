@@ -17,12 +17,13 @@ export const validateFile = (req, res, next) => {
       size: req.file.size,
     };
 
-    fileSchema.parse(fileInfo); // lanzará si no valida
+    fileSchema.parse(fileInfo); // Validar el archivo
 
-    // todo OK
+
+    // Si todo OK, continuar
     next();
   } catch (err) {
-    // Zod genera objetos de error; normalizamos la respuesta
+    // Zod genera objetos de error; Normalizar la respuesta
     if (err?.issues) {
       const messages = err.issues.map(
         (i) => `${i.path.join(".")}: ${i.message}`

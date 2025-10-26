@@ -4,8 +4,7 @@ import dotenv from "dotenv";
 import multer from "multer";
 import { connectDB } from "./config/db.js";
 import { uploadImage, downloadImage } from "./controllers/imageController.js";
-import { validateFile } from "./validators/fileValidator.js";
-
+import { validateFile } from "./validators/validateFile.js";
 // Configurar el entorno
 dotenv.config();
 

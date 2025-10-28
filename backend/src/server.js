@@ -16,12 +16,6 @@ const PORT = process.env.PORT || 4000;
 const storage = multer.memoryStorage();
 const upload = multer({
   storage,
-  limits: { fileSize: 2 * 1024 * 1024 }, // Limite de tamaño del archivo: 2MB
-  fileFilter: (req, file, cb) => {
-    const allowed = ["image/jpeg", "image/png", "image/gif"]; // Tipos de archivos permitidos
-    if (allowed.includes(file.mimetype)) cb(null, true);
-    else cb(null, false); // Si no es un tipo de archivo permitido, devolver un error
-  },
 });
 
 // Middleware para permitir CORS

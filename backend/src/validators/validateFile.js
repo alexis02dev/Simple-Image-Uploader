@@ -24,14 +24,11 @@ export const validateFile = (req, res, next) => {
   } catch (err) {
     // Zod genera objetos de error; Normalizar la respuesta
     if (err?.issues) {
-      const messages = err.issues.map(
-        // Mapear los errores -> err.issues.map((i) => `${i.path.join(".")}: ${i.message}`)
-        (i) => `${i.path.join(".")}: ${i.message}`
-      );
-      return res
-        .status(400)
-        .json({ error: "Archivo inválido", details: messages }); // Si hay errores, devolver un error 400 con los detalles de los errores
+      const message = err.issues.map((i) => i.message); // Mapear los errores -> err.issues.map((i) => i.message)
+      return res.status(400).json({ error: message || "Archivo inválido" }); // Si hay errores, devolver un error 400 con el mensaje de error
     }
-    return res.status(400).json({ error: err.message || "Archivo inválido" }); // Si hay un error, devolver un error 400 con el mensaje de error
+
+    // Manejar otros tipos de errores que no sean de Zod
+    return res.status(500).json({ error: "Error interno del servidor" });
   }
 };

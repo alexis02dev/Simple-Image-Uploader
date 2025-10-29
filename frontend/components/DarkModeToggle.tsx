@@ -1,9 +1,29 @@
-import React from 'react'
+"use client";
+import Image from "next/image";
+import { useDarkModeStore } from "@/store/darkModeStore";
 
-const DarkModeToogle = () => {
+const DarkModeToggle = () => {
+  const isDarkMode = useDarkModeStore((state) => state.isDarkMode);
+  const toggleDarkMode = useDarkModeStore((state) => state.toggleDarkMode);
+
   return (
-    <div>DarkModeToogle</div>
-  )
-}
+    <div>
+      <button
+        onClick={toggleDarkMode}
+        className={
+          isDarkMode
+            ? "bg-gray border border-gray-dark rounded p-1"
+            : "bg-white border border-gray-300 rounded p-1"
+        }
+      >
+        {isDarkMode ? (
+          <Image src="/Sun_fill.svg" alt="Light Mode" width={24} height={24} />
+        ) : (
+          <Image src="/Moon_fill.svg" alt="Dark Mode" width={24} height={24} />
+        )}
+      </button>
+    </div>
+  );
+};
 
-export default DarkModeToogle
+export default DarkModeToggle;

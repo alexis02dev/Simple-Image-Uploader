@@ -3,7 +3,7 @@ import ImageUploader from "@/components/ImageUploader";
 
 export default function ImageUploaderPage() {
   return (
-    <main className="flex min-h-screen flex-col items-center ">
+    <main className="bg-gray-light flex min-h-screen flex-col items-center ">
       <Header />
       <ImageUploader />
     </main>

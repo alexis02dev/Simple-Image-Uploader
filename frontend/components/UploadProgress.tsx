@@ -7,7 +7,7 @@ const UploadProgress = () => {
 
   return (
     <div
-      className={`mt-6 w-[calc(100%-theme(spacing.8))] p-10 rounded-lg md:max-w-2xl mx-auto ${
+      className={`mt-6 w-[calc(100%-theme(spacing.8))] p-10 rounded-lg md:max-w-2xl mx-auto shadow-bottom ${
         isDarkMode ? "bg-gray-dark" : "bg-white"
       } `}
     >

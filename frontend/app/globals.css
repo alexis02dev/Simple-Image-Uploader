@@ -48,6 +48,9 @@
   .bg-gray-dark {
     background-color: var(--color-gray-dark);
   }
+  .bg-gray-light {
+    background-color: var(--color-gray-light);
+  }
 
   .text-gray-darkest {
     color: var(--color-gray-darkest);

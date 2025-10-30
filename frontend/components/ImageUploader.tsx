@@ -6,13 +6,21 @@ import { useDarkModeStore } from "@/store/darkModeStore";
 const ImageUploader = () => {
   const isDarkMode = useDarkModeStore((state) => state.isDarkMode);
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone();
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: {
+      "image/*": [".jpg", ".png", ".gif"],
+    },
+  });
 
   return (
     <div className="mt-30 w-full max-w-2xl mx-auto px-3.5 md:px-10">
       <div
-        className={`rounded-lg p-2 ${
-          isDragActive ? "bg-blue-500" : isDarkMode ? "bg-gray" : "bg-white"
+        className={`rounded-lg p-2 shadow-bottom ${
+          isDragActive
+            ? "bg-blue-500"
+            : isDarkMode
+            ? "bg-gray-dark"
+            : "bg-white"
         }`}
       >
         <div
@@ -21,7 +29,7 @@ const ImageUploader = () => {
             isDragActive
               ? "border-blue-500 bg-blue-500"
               : isDarkMode
-              ? "border-gray-400 bg-gray hover:border-gray-500"
+              ? "border-gray bg-gray-dark hover:border-gray-400"
               : "border-gray-300 bg-white hover:border-gray-400"
           }`}
         >
@@ -61,7 +69,7 @@ const ImageUploader = () => {
                 isDragActive
                   ? "text-white"
                   : isDarkMode
-                  ? "text-white"
+                  ? "text-gray-lighter"
                   : "text-gray-500"
               }`}
             >

@@ -1,27 +1,12 @@
 "use client";
-import React, { useCallback, useState } from "react";
 import Image from "next/image";
 import { useDropzone } from "react-dropzone";
 import { useDarkModeStore } from "@/store/darkModeStore";
 
 const ImageUploader = () => {
-  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const isDarkMode = useDarkModeStore((state) => state.isDarkMode);
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    setUploadedFiles((prevFiles) => [...prevFiles, ...acceptedFiles]);
-  }, []);
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-    accept: {
-      "image/*": [".jpg", ".png", ".gif"],
-    },
-  });
-
-  const removeFile = (index: number) => {
-    setUploadedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
-  };
+  const { getRootProps, getInputProps, isDragActive } = useDropzone();
 
   return (
     <div className="mt-30 w-full max-w-2xl mx-auto px-3.5 md:px-10">
@@ -85,34 +70,6 @@ const ImageUploader = () => {
           </div>
         </div>
       </div>
-
-      {uploadedFiles.length > 0 && (
-        <div className="mt-6">
-          <h3 className="text-lg font-semibold mb-4">Imágenes cargadas:</h3>
-          <div className="grid grid-cols-3 gap-4">
-            {uploadedFiles.map((file, index) => (
-              <div key={index} className="relative group">
-                <Image
-                  src={URL.createObjectURL(file)}
-                  alt={file.name}
-                  width={300}
-                  height={128}
-                  className="w-full h-32 object-cover rounded-lg"
-                />
-                <button
-                  onClick={() => removeFile(index)}
-                  className="absolute top-1 right-1 bg-red-500 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition"
-                >
-                  Eliminar
-                </button>
-                <p className="text-sm text-gray-600 mt-1 truncate">
-                  {file.name}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 };

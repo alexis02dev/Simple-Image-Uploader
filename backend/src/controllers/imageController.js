@@ -18,10 +18,8 @@ const streamUpload = (buffer, options = {}) => {
     const stream = cloudinary.uploader.upload_stream(
       options,
       (error, result) => {
-        if (result)
-          resolve(
-            result
-          ); // Si el resultado es exitoso, resolver la promesa con el resultado
+        if (result) resolve(result);
+        // Si el resultado es exitoso, resolver la promesa con el resultado
         else reject(error); // Si el resultado es fallido, rechazar la promesa con el error
       }
     );
@@ -74,8 +72,11 @@ export const downloadImage = async (req, res) => {
     // Si no se encuentra, devolver un error 404 -> res.status(404).json({ error: "Imagen no encontrada" }) -> return
     if (!image) return res.status(404).json({ error: "Imagen no encontrada" });
 
-    // Redirigir a la URL de la imagen -> image.url
-    return res.redirect(image.url);
+    // Devolver la información de la imagen en formato JSON
+    return res.status(200).json({
+      filename: image.filename,
+      url: image.url,
+    });
   } catch (error) {
     console.error("❌ Error al descargar imagen:", error); // Si hay un error, devolver un error 500 -> res.status(500).json({ error: "Error al descargar la imagen" }) -> return
     return res.status(500).json({ error: "Error al descargar la imagen" });

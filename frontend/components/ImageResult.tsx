@@ -4,9 +4,7 @@ import Image from "next/image";
 import { useDarkModeStore } from "@/store/darkModeStore";
 
 interface ImageResultProps {
-  imageUrl?: string;
-  fileName?: string;
-  onRemove?: () => void;
+  image: File
 }
 
 const ImageResult = ({
@@ -16,28 +14,7 @@ const ImageResult = ({
 }: ImageResultProps) => {
   const isDarkMode = useDarkModeStore((state) => state.isDarkMode);
 
-  const handleShare = () => {
-    // Compartir la imagen
-    if (navigator.share) {
-      navigator.share({
-        title: "Imagen subida",
-        text: fileName,
-        url: imageUrl,
-      });
-    } else {
-      // Fallback: copiar al portapapeles
-      navigator.clipboard.writeText(imageUrl);
-      alert("Enlace copiado al portapapeles");
-    }
-  };
 
-  const handleDownload = () => {
-    // Descargar la imagen
-    const link = document.createElement("a");
-    link.href = imageUrl;
-    link.download = fileName;
-    link.click();
-  };
 
   return (
     <div className="mt-8 w-full max-w-2xl mx-auto">

@@ -2,14 +2,28 @@
 import Image from "next/image";
 import { useDropzone } from "react-dropzone";
 import { useDarkModeStore } from "@/store/darkModeStore";
+import { useCallback } from "react";
 
-const ImageUploader = () => {
+interface ImageUploaderProps {
+  onUpload: (file: File) => void;
+}
+
+const ImageUploader = ({ onUpload }: ImageUploaderProps) => {
   const isDarkMode = useDarkModeStore((state) => state.isDarkMode);
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: {
-      "image/*": [".jpg", ".png", ".gif"],
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      console.log("File(s) dropped", acceptedFiles);
+      if (acceptedFiles && acceptedFiles.length > 0) {
+        onUpload(acceptedFiles[0]);
+      }
     },
+    [onUpload]
+  );
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    multiple: false,
   });
 
   return (

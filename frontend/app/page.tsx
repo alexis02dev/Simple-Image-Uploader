@@ -1,7 +1,7 @@
 "use server";
 import UploadContent from "@/components/UploadContent";
 
-export default function ImageUploaderPage() {
+export default async function ImageUploaderPage() {
   return (
     <>
       <UploadContent />

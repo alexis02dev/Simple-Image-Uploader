@@ -1,5 +1,5 @@
 import axios from "axios";
-import { fileSchema } from "../../../backend/src/validators/schemaZod";
+import { fileSchema } from "@/validations/imageSchemaZod";
 import { ZodError } from "zod";
 
 const apiUrl: string =

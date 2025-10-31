@@ -60,7 +60,7 @@ const ImageResult = ({
       </div>
 
       {/* Botones */}
-      <div className="flex gap-4 justify-center pt-4">
+      <div className="flex gap-4 justify-center pt-6">
         <button
           onClick={handleShare}
           className="flex items-center gap-2 px-6 py-2 bg-blue text-white rounded-lg hover:bg-blue-700 transition font-medium"

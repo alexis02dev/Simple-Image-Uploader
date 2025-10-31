@@ -7,7 +7,11 @@ export default function ImageUploaderPage() {
   const isDarkMode = useDarkModeStore((state) => state.isDarkMode);
 
   return (
-    <main className={`${isDarkMode ? "bg-gray-darkest" : "bg-gray-light"} flex min-h-screen flex-col items-center`}>
+    <main
+      className={`${
+        isDarkMode ? "bg-gray-darkest" : "bg-gray-light"
+      } flex min-h-screen flex-col items-center`}
+    >
       <Header />
       <ImageUploader />
     </main>

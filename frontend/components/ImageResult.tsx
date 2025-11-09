@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { useDarkModeStore } from "@/store/darkModeStore";
 import { downloadImage } from "@/lib/api/downloadImage";
+import { toast } from "sonner";
 
 interface ImageResultProps {
   image: { filename: string; url: string };
@@ -14,19 +15,23 @@ const ImageResult = ({ image }: ImageResultProps) => {
   const handleDownload = async () => {
     try {
       await downloadImage(image.filename);
+      toast.success("Descarga completada correctamente.");
     } catch (err: unknown) {
-      alert((err as Error).message || "Error al descargar la imagen.");
+      toast.error((err as Error).message || "Error al descargar la imagen.");
     }
   };
 
   const handleShare = async () => {
-    if (navigator.share) {
-      try {
+    try {
+      if (navigator.share) {
         await navigator.share({ title: "Imagen", url: image.url });
-      } catch {}
-    } else {
-      await navigator.clipboard.writeText(image.url);
-      alert("URL copiada al portapapeles");
+        toast.success("Imagen compartida correctamente.");
+      } else {
+        await navigator.clipboard.writeText(image.url);
+        toast.info("URL copiada al portapapeles.");
+      }
+    } catch {
+      toast.error("No se pudo compartir la imagen.");
     }
   };
 

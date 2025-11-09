@@ -2,22 +2,36 @@
 import React from "react";
 import Image from "next/image";
 import { useDarkModeStore } from "@/store/darkModeStore";
+import { downloadImage } from "@/lib/api/downloadImage";
 
 interface ImageResultProps {
-  image: File
+  image: { filename: string; url: string };
 }
 
-const ImageResult = ({
-  imageUrl = "/professional.png",
-  fileName = "university.png",
-  onRemove = () => {},
-}: ImageResultProps) => {
+const ImageResult = ({ image }: ImageResultProps) => {
   const isDarkMode = useDarkModeStore((state) => state.isDarkMode);
 
+  const handleDownload = async () => {
+    try {
+      await downloadImage(image.filename);
+    } catch (err: unknown) {
+      alert((err as Error).message || "Error al descargar la imagen.");
+    }
+  };
 
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: "Imagen", url: image.url });
+      } catch {}
+    } else {
+      await navigator.clipboard.writeText(image.url);
+      alert("URL copiada al portapapeles");
+    }
+  };
 
   return (
-    <div className="mt-8 w-full max-w-2xl mx-auto">
+    <div className="mt-20 mx-auto w-full max-w-2xl px-3.5 md:px-0">
       {/* Imagen subida */}
       <div
         className={`rounded-lg p-2  ${
@@ -28,8 +42,8 @@ const ImageResult = ({
           className={`w-full h-96 relative rounded-lg overflow-hidden bg-gray-100`}
         >
           <Image
-            src={imageUrl}
-            alt={fileName}
+            src={image.url}
+            alt={image.filename}
             fill
             className="w-full h-full object-cover rounded-lg"
           />

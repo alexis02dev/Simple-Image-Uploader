@@ -50,16 +50,12 @@ export const UploadContent = () => {
       } flex min-h-screen flex-col items-center`}
     >
       <Header />
-      <ImageUploader onUpload={handleUpload} />
+      {!imageResult && !loading && <ImageUploader onUpload={handleUpload} />}
       {error && (
         <div className="mt-4 text-red-600 bg-red-50 p-3 rounded">{error}</div>
       )}
       {loading && <UploadProgress />}
-      {imageResult && (
-        <div className="mt-6">
-          <ImageResult image={imageResult} />
-        </div>
-      )}
+      {imageResult && <ImageResult image={imageResult} />}
     </main>
   );
 };

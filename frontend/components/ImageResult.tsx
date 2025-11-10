@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { useDarkModeStore } from "@/store/darkModeStore";
 import { downloadImage } from "@/lib/api/downloadImage";
+import { copyToClipboard } from "@/lib/utils/copyToClipboard";
 import { toast } from "sonner";
 
 interface ImageResultProps {
@@ -23,15 +24,10 @@ const ImageResult = ({ image }: ImageResultProps) => {
 
   const handleShare = async () => {
     try {
-      if (navigator.share) {
-        await navigator.share({ title: "Imagen", url: image.url });
-        toast.success("Imagen compartida correctamente.");
-      } else {
-        await navigator.clipboard.writeText(image.url);
-        toast.info("URL copiada al portapapeles.");
-      }
+      await copyToClipboard(image.url);
+      toast.success("URL copiada al portapapeles.");
     } catch {
-      toast.error("No se pudo compartir la imagen.");
+      toast.error("No se pudo copiar la URL.");
     }
   };
 

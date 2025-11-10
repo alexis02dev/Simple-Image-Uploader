@@ -60,16 +60,16 @@ export const uploadImage = async (req, res) => {
 };
 
 /**
- * GET /api/download/:filename
- * Descarga una imagen desde Cloudinary usando el nombre del archivo
+ * GET /api/download/:publicId
+ * Descarga una imagen desde Cloudinary usando el public_id de la imagen
  */
 export const downloadImage = async (req, res) => {
   try {
-    // Obtener el nombre del archivo desde los parámetros de la ruta -> req.params.filename
-    const { filename } = req.params;
-    // Buscar la imagen en la base de datos MongoDB -> Image.findOne({ filename })
-    const image = await Image.findOne({ filename });
-    // Si no se encuentra, devolver un error 404 -> res.status(404).json({ error: "Imagen no encontrada" }) -> return
+    // Obtener el public_id desde los parámetros de la ruta -> req.params.publicId
+    const { publicId } = req.params;
+    // Buscar la imagen en la base de datos MongoDB por public_id -> Image.findOne({ public_id: publicId })
+    const image = await Image.findOne({ public_id: publicId });
+    // Si no se encuentra, devolver un error 404
     if (!image) return res.status(404).json({ error: "Imagen no encontrada" });
 
     // Devolver la información de la imagen en formato JSON
@@ -78,7 +78,7 @@ export const downloadImage = async (req, res) => {
       url: image.url,
     });
   } catch (error) {
-    console.error("❌ Error al descargar imagen:", error); // Si hay un error, devolver un error 500 -> res.status(500).json({ error: "Error al descargar la imagen" }) -> return
+    console.error("❌ Error al descargar imagen:", error);
     return res.status(500).json({ error: "Error al descargar la imagen" });
   }
 };

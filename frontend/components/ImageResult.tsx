@@ -6,7 +6,7 @@ import { downloadImage } from "@/lib/api/downloadImage";
 import { toast } from "sonner";
 
 interface ImageResultProps {
-  image: { filename: string; url: string };
+  image: { public_id: string; filename: string; url: string };
 }
 
 const ImageResult = ({ image }: ImageResultProps) => {
@@ -14,7 +14,7 @@ const ImageResult = ({ image }: ImageResultProps) => {
 
   const handleDownload = async () => {
     try {
-      await downloadImage(image.filename);
+      await downloadImage(image.public_id);
       toast.success("Descarga completada correctamente.");
     } catch (err: unknown) {
       toast.error((err as Error).message || "Error al descargar la imagen.");

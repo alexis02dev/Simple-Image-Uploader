@@ -1,3 +1,6 @@
+"use client";
+import axios from "axios";
+
 const apiUrl: string =
   process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
 
@@ -7,17 +10,14 @@ const apiUrl: string =
 export async function downloadImage(publicId: string): Promise<void> {
   try {
     // Obtener la información de la imagen
-    const res = await fetch(`${apiUrl}/api/download/${encodeURIComponent(publicId)}`);
-    if (!res.ok) {
-      throw new Error(`No se pudo descargar la imagen (${res.status}).`);
-    }
-
-    const data = await res.json();
+    const { data } = await axios.get(
+      `${apiUrl}/api/download/${encodeURIComponent(publicId)}`
+    );
     const { filename, url } = data;
 
     // Descargar el blob desde la URL de Cloudinary
-    const imageRes = await fetch(url);
-    const blob = await imageRes.blob();
+    const imageRes = await axios.get(url, { responseType: "blob" });
+    const blob = imageRes.data;
 
     // Crear objeto URL del blob
     const blobUrl = URL.createObjectURL(blob);
@@ -33,8 +33,9 @@ export async function downloadImage(publicId: string): Promise<void> {
     // Liberar el objeto URL
     URL.revokeObjectURL(blobUrl);
   } catch (err: unknown) {
-    const error =
-      err instanceof Error ? err.message : "Error al descargar la imagen.";
+    const error = axios.isAxiosError(err)
+      ? err.response?.data?.error || err.message
+      : "Error al descargar la imagen.";
     throw new Error(error);
   }
 }

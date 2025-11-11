@@ -13,7 +13,6 @@ const ImageUploader = ({ onUpload }: ImageUploaderProps) => {
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
-      console.log("File(s) dropped", acceptedFiles);
       if (acceptedFiles && acceptedFiles.length > 0) {
         onUpload(acceptedFiles[0]);
       }

@@ -46,7 +46,7 @@ const ImageResult = ({ image }: ImageResultProps) => {
             src={image.url}
             alt={image.filename}
             fill
-            className="w-full h-full object-cover rounded-lg"
+            className="w-full h-full object-fit rounded-lg"
           />
         </div>
       </div>
